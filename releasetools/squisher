@@ -165,8 +165,7 @@ cd $REPACK
 # Determine what to name the new signed package
 MODVERSION=`sed -n -e'/ro\.modversion/s/^.*=//p' $REPACK/ota/system/build.prop`
 : ${MODVERSION:=nightly}
-
-OUTFILE=$OUT/cm-$MODVERSION.zip
+OUTFILE=$OUT/cm$MODVERSION.zip
 
 if [ -n "$CM_NIGHTLY" ]; then
 	OUTFILE=$OUT/CM$MODVERSION.zip
