@@ -221,18 +221,17 @@ set_ioscheduler()
     "sio" )
       insmod $MODULE_DIR/sio_iosched.ko
       for i in /sys/block/mmc*/queue; do
-        [ -f "$i/scheduler" ]                 && echo $iosched > $i/scheduler
-
-        [ -f "$i/iosched/low_latency" ]       && echo 1 > $i/iosched/low_latency
-        [ -f "$i/iosched/back_seek_penalty" ] && echo 1 > $i/iosched/back_seek_penalty
-        [ -f "$i/iosched/back_seek_max" ]     && echo 1000000000 > $i/iosched/back_seek_max
-        [ -f "$i/iosched/slice_idle" ]        && echo 0 > $i/iosched/slice_idle
-        [ -f "$i/iosched/fifo_batch" ]        && echo 1 > $i/iosched/fifo_batch
-        [ -f "$i/iosched/quantum" ]           && echo 16 > $i/iosched/quantum
-        [ -f "$i/nr_requests" ]               && echo 512 > $i/nr_requests
-
-        [ -f "$i/rotational" ]  && [ "`cat $i/rotational`" -ne "0" ] && echo 0 > $i/rotational
-        [ -f "$i/iostats" ]     && [ "`cat $i/iostats`" -ne "0" ]    && echo 0 > $i/iostats
+        echo "sio" > $i/scheduler
+        echo "0" > $i/rotational
+        echo "2048" > $i/read_ahead_kb
+        echo "4000" > $i/iosched/async_read_expire
+        echo "16000" > $i/iosched/async_write_expire
+        echo "1" > $i/iosched/fifo_batch;
+        echo "500" > $i/iosched/sync_read_expire
+        echo "2000" > $i/iosched/sync_write_expire
+        echo "0" > $i/iosched/writes_starved
+        echo "2048" > $i/nr_requests
+        echo "0" > $i/iostats
       done
     ;;
      * )
