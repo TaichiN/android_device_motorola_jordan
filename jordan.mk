@@ -69,7 +69,10 @@ PRODUCT_PACKAGES += \
 	libaudiohw_legacy audio.primary.jordan \
 
 # ICS graphics
-PRODUCT_PACKAGES += libGLESv2 libEGL libGLESv1_CM libgtest
+PRODUCT_PACKAGES += libGLESv2 libEGL libGLESv1_CM
+
+# Static libs to build tests without errors
+PRODUCT_PACKAGES += libgtest ligtest_main
 
 # TO FIX for ICS
 PRODUCT_PACKAGES += gralloc.default hwcomposer.default
@@ -113,6 +116,10 @@ PRODUCT_PACKAGES += FileManager Torch Apollo
 
 # Experimental TI OpenLink
 PRODUCT_PACKAGES += libnl_2 iw
+
+# other cmdline tools
+PRODUCT_PACKAGES += tcpdump ping6
+PRODUCT_PACKAGES += io devmem2
 
 # copy all vendor (motorola) kernel modules to system/lib/modules
 PRODUCT_COPY_FILES += $(shell test -d vendor/motorola/jordan/lib/modules &&  \

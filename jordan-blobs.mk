@@ -53,6 +53,7 @@ PRODUCT_COPY_FILES += \
 	$(DEVICE_PREBUILT)/etc/init.d/90multitouch:system/etc/init.d/90multitouch \
 	$(DEVICE_PREBUILT)/etc/profile:system/etc/profile \
 	$(DEVICE_PREBUILT)/etc/sysctl.conf:system/etc/sysctl.conf \
+	$(DEVICE_PREBUILT)/etc/inetd.conf:system/etc/inetd.conf \
 	$(DEVICE_PREBUILT)/etc/busybox.fstab:system/etc/fstab \
 	$(DEVICE_PREBUILT)/etc/wifi/dnsmasq.conf:system/etc/wifi/dnsmasq.conf \
 	$(DEVICE_PREBUILT)/etc/wifi/tiwlan.ini:system/etc/wifi/tiwlan.ini \
@@ -65,7 +66,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
 	${device_path}/releasetools/addon.d/60-baseband.sh:system/addon.d/60-baseband.sh \
 	${device_path}/releasetools/addon.d/70-gapps.sh:system/addon.d/70-gapps.sh \
-	${device_path}/releasetools/addon.d/70-multiboot.sh:system/addon.d/70-multiboot.sh \
 
 # Backup kernel modules and bootmenu overclock config
 ifndef CM_RELEASE
