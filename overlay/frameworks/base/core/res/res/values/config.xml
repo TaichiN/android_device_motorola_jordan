@@ -344,4 +344,8 @@
     <string-array name="config_vendorServices">
         <item>/system/framework/com.motorola.android.location.jar:com.android.server.LocationProxyService</item>
     </string-array>
+
+    <!-- Timeout in MS for how long you have to long-press the back key to kill the foreground app. -->
+    <integer name="config_backKillTimeout">1600</integer>
+
 </resources>
