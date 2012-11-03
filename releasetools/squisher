@@ -183,12 +183,12 @@ rm -rf $REPACK/ota/recovery
 MODVERSION=`sed -n -e'/ro\.modversion/s/^.*CyanogenMod-//p' $REPACK/ota/system/build.prop`
 : ${MODVERSION:=nightly}
 OUTFILE=$OUT/CM$MODVERSION.zip
-echo -e $CL_CYN"MODVERSION: $MODVERSION"$CL_RST
 
 if [ -n "$CM_NIGHTLY_BOOT" ]; then
 	MODVERSION=`echo $MODVERSION | sed -r 's/NIGHTLY/BOOT'$CM_NIGHTLY_BOOT'/'`
 	OUTFILE=$OUT/CM$MODVERSION.zip
 fi
+echo -e $CL_CYN"MODVERSION: $MODVERSION"$CL_RST
 
 # Pack it up and sign
 printf "Zipping package..."
