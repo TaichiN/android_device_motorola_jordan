@@ -1,13 +1,15 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Squish a CM otapackage for distribution
 # cyanogen / CyanogenDefy
 #
 
-echo "JORDAN SQUISHER:"
-echo "================"
+. $ANDROID_BUILD_TOP/vendor/cyanogen/tools/functions
 
-DEVICE_OUT=$ANDROID_BUILD_TOP/out/target/product/jordan
+echo -e $CL_CYN"JORDAN SQUISHER:"$CL_RST
+echo -e $CL_CYN"================"$CL_RST
+
+DEVICE_OUT=$OUT
 DEVICE_TOP=$ANDROID_BUILD_TOP/device/motorola/jordan
 DEVICE_COMMON=$ANDROID_BUILD_TOP/device/motorola/jordan-common
 VENDOR_TOP=$ANDROID_BUILD_TOP/vendor/motorola/jordan
@@ -27,7 +29,7 @@ else
 fi
 
 if [ -z "$OUT" -o ! -d "$OUT" ]; then
-	echo "ERROR: $0 only works with a full build environment. $OUT should exist."
+	echo -e $CL_RED"ERROR: $0 only works with a full build environment. $OUT should exist."$CL_RST
 	exit 1
 fi
 
@@ -39,7 +41,7 @@ else
     OTAPACKAGE=$OUT/$TARGET_PRODUCT-ota-$TARGET_BUILD_VARIANT.$USER.zip
 fi
 if [ ! -f "$OTAPACKAGE" ]; then
-	echo "$OTAPACKAGE doesn't exist!"
+	echo -e $CL_RED"$OTAPACKAGE doesn't exist!"$CL_RST
 	exit 1
 fi
 
@@ -181,6 +183,7 @@ rm -rf $REPACK/ota/recovery
 MODVERSION=`sed -n -e'/ro\.modversion/s/^.*CyanogenMod-//p' $REPACK/ota/system/build.prop`
 : ${MODVERSION:=nightly}
 OUTFILE=$OUT/CM$MODVERSION.zip
+echo -e $CL_CYN"MODVERSION: $MODVERSION"$CL_RST
 
 if [ -n "$CM_NIGHTLY_BOOT" ]; then
 	MODVERSION=`echo $MODVERSION | sed -r 's/NIGHTLY/BOOT'$CM_NIGHTLY_BOOT'/'`
@@ -194,7 +197,7 @@ echo
 printf "Signing package..."
 SECURITYDIR=$ANDROID_BUILD_TOP/build/target/product/security
 java -Xmx768m \
-	-jar $ANDROID_HOST_OUT/out/host/$OUT_TARGET_HOST/framework/signapk.jar \
+	-jar $ANDROID_HOST_OUT/framework/signapk.jar \
 	-w $SECURITYDIR/testkey.x509.pem $SECURITYDIR/testkey.pk8 \
 	$REPACK/update.zip $OUTFILE
 echo
@@ -210,7 +213,7 @@ img=`basename $OUTFILE`
 cd `dirname $OUTFILE`
 $MD5 $img >$img.md5sum
 echo
-echo "Package complete: $OUTFILE"
+echo -e $CL_GRN"Package complete: $OUTFILE"$CL_RST
 cat $img.md5sum
 echo
 # Build date and current time:
