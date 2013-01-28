@@ -1,0 +1,10 @@
+[
+    {
+      "repository": "android_device_motorola_common",
+      "target_path": "device/motorola/common"
+    },
+    {
+      "repository": "android_device_motorola_jordan-common",
+      "target_path": "device/motorola/jordan-common"
+    }
+]
